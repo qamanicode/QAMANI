@@ -8,7 +8,20 @@ export default defineConfig(({mode}) => {
   return {
     plugins: [react(), tailwindcss()],
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || ''),
+    },
+    build: {
+      outDir: 'dist',
+      sourcemap: mode !== 'production',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+            icons: ['lucide-react'],
+            motion: ['motion'],
+          },
+        },
+      },
     },
     resolve: {
       alias: {
