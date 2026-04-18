@@ -1,12 +1,34 @@
 {
   "name": "qamaniai",
-  "private": true,
   "version": "1.0.0",
-  "description": "The Build Tool for the Web - Blazing fast frontend build tool powering the next generation of web applications.",
+  "description": "أداة بناء مواقع مدعومة بالذكاء الاصطناعي لبناء المشاريع في ثوانٍ",
   "type": "module",
   "bin": {
     "qamaniai": "./bin/cli.js"
   },
+  "main": "./src/main.tsx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qamanicode/qamaniai.git"
+  },
+  "keywords": [
+    "cli",
+    "ai",
+    "generator",
+    "website-builder",
+    "qamaniai",
+    "gemini",
+    "tailwindcss"
+  ],
+  "author": "QAMANIAI Team",
+  "license": "MIT",
+  "files": [
+    "bin",
+    "src",
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",

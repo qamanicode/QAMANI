@@ -1,0 +1,15 @@
+# NPM Ignore
+node_modules
+.next
+dist
+.env
+.env.*
+.DS_Store
+*.log
+.vscode
+.git
+.gitignore
+tsconfig.json
+vite.config.ts
+public
+src/assets

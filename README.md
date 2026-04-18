@@ -1,75 +1,69 @@
-# QAMANAI - The Build Tool for the Web
+# 🚀 QAMANIAI - AI-Powered Website Builder
 
-QAMANAI is a blazing fast frontend build tool powering the next generation of web applications. It is designed to be fast, extensible, and developer-friendly.
+**QAMANIAI** هو الجيل القادم من أدوات بناء مواقع الويب. أداة سطر أوامر (CLI) ومنصة بصرية متكاملة تمكنك من تحويل أفكارك إلى تطبيقات ويب احترافية وعصرية في ثوانٍ معدودة باستخدام قوة **Gemini AI**.
 
-[العربية](#qamanai---أداة-البناء-للوويب)
+---
 
-## Features
+## ✨ المميزات الرئيسية (Key Features)
 
-- **Instant Server Start**: Get up and running in seconds.
-- **Lightning Fast HMR**: Hot Module Replacement that stays fast regardless of app size.
-- **Rich Features**: Out-of-the-box support for TypeScript, JSX, CSS, and more.
-- **Optimized Build**: Pre-configured Rollup build with multi-page and library mode support.
-- **AI Powered**: Integrated AI generator to turn ideas into code instantly.
-- **Universal**: Supports React, Vue, Svelte, Angular, and more.
+*   **🎨 بناء بصري بالسحب والإفلات (Visual Builder):** واجهة مستخدم بديهية تتيح لك تصميم موقعك عبر سحب الأقسام وترتيبها بكل سهولة.
+*   **🧠 توليد الكود بالذكاء الاصطناعي (AI Generation):** هل لديك فكرة؟ فقط صفها لـ **Gemini 1.5 Flash** وسيقوم بكتابة كود HTML/Tailwind CSS متكامل لك.
+*   **🛠️ تحرير مباشر (Live Editing):** عدل النصوص والصور والمكونات مباشرة وشاهد التغييرات لحظياً.
+*   **📱 تصميم متجاوب (Responsive Design):** معاينة في الوقت الفعلي لأجهزة الجوال، الجهاز اللوحي، والحاسوب.
+*   **📦 تصدير برمجياً (Export to Project):** صدّر تصميمك كمشروع React/Vite كامل ومستقل بضغطة زر.
+*   **⚡ أداة سطر أوامر (Powerful CLI):** تحكم في مشاريعك، ولد ملفات جديدة، وانشرها مباشرة من Terminal الخاص بك.
 
-## Getting Started
+---
 
-### Installation
+## 🚀 التشغيل السريع (Quick Start)
+
+لست بحاجة لتثبيت أي شيء بشكل دائم لبدء العمل، جرب الأداة مباشرة عبر `npx`:
 
 ```bash
-npm create qamanai@latest
+npx qamaniai
 ```
 
-### Development
+ستقوم الأداة بسؤالك عن اسم مشروعك وما الذي تود بناءه، وسيقوم الذكاء الاصطناعي بالبقية! 🪄
+
+---
+
+## 🛠️ التثبيت (Installation)
+
+إذا كنت تفضل تثبيت الأداة عالمياً في جهازك:
 
 ```bash
-npm install
-npm run dev
-```
-
-### Build
-
-```bash
-npm run build
+npm install -g qamaniai
 ```
 
 ---
 
-# QAMANAI - أداة البناء للوويب
+## 📝 طريقة الاستخدام (How it Works)
 
-QAMANAI هي أداة بناء واجهة أمامية سريعة للغاية تدعم الجيل القادم من تطبيقات الويب. تم تصميمها لتكون سريعة وقابلة للتوسيع وصديقة للمطورين.
+1.  **اكتب فكرتك 💡**: قم بتشغيل الأداة واكتب وصفاً بسيطاً (مثل: "موقع لشركة تقنية ناشئة بألوان زرقاء وكود نظيف").
+2.  **الذكاء الاصطناعي يبني 🤖**: سيقوم نظام QAMANIAI المعتمد على Gemini AI بتحليل الوصف وتوليد كود Tailwind CSS عصري.
+3.  **عدل وانشر ✅**: يمكنك الدخول للمجلد الجديد، تعديل الملفات، وتشغيلها فوراً باستخدام `npm start`.
 
-## المميزات
+---
 
-- **بدء تشغيل فوري للخادم**: ابدأ العمل في ثوانٍ.
-- **HMR فائق السرعة**: استبدال الوحدات الساخنة الذي يظل سريعاً بغض النظر عن حجم التطبيق.
-- **ميزات غنية**: دعم جاهز لـ TypeScript و JSX و CSS والمزيد.
-- **بناء مُحسَّن**: بناء Rollup مهيأ مسبقاً مع دعم وضع الصفحات المتعددة والمكتبات.
-- **مدعوم بالذكاء الاصطناعي**: مولد ذكاء اصطناعي مدمج لتحويل الأفكار إلى كود فوراً.
-- **عالمي**: يدعم React و Vue و Svelte و Angular والمزيد.
+## 📋 المتطلبات (Requirements)
 
-## ابدأ الآن
+*   **Node.js**: إصدار 18 أو أحدث.
+*   **API Key**: ستحتاج إلى مفتاح **Gemini API** (يمكنك الحصول عليه مجاناً من [Google AI Studio](https://aistudio.google.com/)).
+    *   قم بإعداد المفتاح في متغيرات البيئة باسم `GEMINI_API_KEY`.
 
-### التثبيت
+---
 
-```bash
-npm create qamanai@latest
-```
+## 🤝 المساهمة (Contribution)
 
-### التطوير
+نحن نرحب بمساهمات الجميع! إذا كان لديك اقتراح لتحسين الأداة أو وجدت ثغرة برمجية، لا تتردد في فتح **Issue** أو إرسال **Pull Request**.
 
-```bash
-npm install
-npm run dev
-```
+---
 
-### البناء
+## 📜 الترخيص (License)
 
-```bash
-npm run build
-```
+هذا المشروع مرخص بموجب ترخيص **MIT**.
 
-## License
+---
 
-MIT License. See [LICENSE](LICENSE) for more details.
+### صنع بكل ❤️ لمجتمع المطورين العربي والعالمي.
+[GitHub Repository](https://github.com/qamanicode/qamaniai) | [NPM Package](https://www.npmjs.com/package/qamaniai)
