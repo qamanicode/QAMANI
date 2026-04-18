@@ -1,77 +1,59 @@
-# 🚀 QAMANIAI: The Future of AI-Powered Web Building
+# @qamanicode/qamaniai 🚀
+
+The elite AI-powered low-code platform. Build, visualize, and deploy SEO-optimized websites in seconds using **Gemini 1.5 Flash**.
 
 [![npm version](https://img.shields.io/npm/v/@qamanicode/qamaniai.svg)](https://www.npmjs.com/package/@qamanicode/qamaniai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**QAMANIAI** is a sophisticated, low-code platform and CLI tool designed to bridge the gap between imagination and production-ready web applications. Powered by **Google's Gemini 1.5 Flash**, it enables developers and creators to generate, visualize, and export high-quality websites in seconds.
+## ✨ Major Features in v1.0.9 (The AI Unbound Update)
 
----
+- 👁️ **Vision-to-Layout**: Upload a sketch or screenshot. QAMANIAI analyzes it and builds the layout for you instantly.
+- 🪄 **The Magic Pen**: Integrated AI copywriting assistant. Improve, SEO-optimize, or translate any text block with a single click.
+- ⌨️ **AI Design Agent (Command Bar)**: Control your design using natural language. Just type "Make a landing page for a creative agency" and watch it build.
+- 🖱️ **Quick Edit Mode**: Click any element in the preview to edit text inline. 
+- 🌙 **Native Dark Mode**: Full support for dark/light themes in exported projects.
 
-## ✨ Features (The Magic Behind QAMANIAI)
-
-*   **🧠 Intelligent Generation:** Describe your vision in natural language, and watch our AI-engine craft modern, responsive layouts using Tailwind CSS.
-*   **🎨 Intuitive Visual Builder:** Fine-tune your UI with a drag-and-drop interface. Move sections, edit text, and swap images with zero friction.
-*   **📂 Production-Ready Export:** Seamlessly transition from a draft to a full React + Vite + TypeScript project. Use the code you generate for real-world deployments.
-*   **🛠️ Developer-First CLI:** A powerful terminal interface for rapid prototyping and project initialization.
-*   **📱 Universal Responsiveness:** Every component is built with a mobile-first philosophy, ensuring your site looks stunning on any screen.
-
----
-
-## 🛠️ Installation
-
-You can get started instantly without permanent installation using `npx`:
+## 🚀 Quick Start
 
 ```bash
-npx @qamanicode/qamaniai
+npm install @qamanicode/qamaniai
 ```
 
-Or install it globally for frequent use:
+### Integrate the Visual Builder
 
-```bash
-npm install -g @qamanicode/qamaniai
+```tsx
+import { VisualBuilder } from '@qamanicode/qamaniai';
+
+function App() {
+  return (
+    <div className="h-screen w-full">
+      <VisualBuilder />
+    </div>
+  );
+}
 ```
 
----
+## 💎 Why Gemini 1.5 Flash?
 
-## 🚀 Quick Start: Building Your First App
+QAMANIAI v1.0.9 leverages **Gemini 1.5 Flash** for its multi-modal capabilities and near-instant response times. This allows for fluid real-time interactions—from vision analysis to design generation—without breaking the creative flow.
 
-1.  **Launch the CLI:**
-    ```bash
-    npx @qamanicode/qamaniai
-    ```
-2.  **Describe Your Vision:**
-    When prompted, provide a description:
-    > "A sleek landing page for an AI startup with dark mode, glowing accents, and a pricing table."
-3.  **AI Scaffolding:**
-    The engine analyzes your prompt, fetches the best design patterns, and generates a structured `index.html`.
-4.  **Edit & Deploy:**
-    Enter the generated directory, start the server, and customize as needed!
+| Feature | Traditional Dev | QAMANIAI v1.0.9 |
+| :--- | :--- | :--- |
+| **Input** | Manual Coding | Text, Image, Sketch |
+| **Copywriting** | Manual | Magic Pen (AI) |
+| **Layout** | Drag & Drop | Design Agent (Chat) |
+| **SEO & Dark Mode** | Manual Config | Auto-integrated |
 
----
+## 🔗 Official Links
 
-## 📋 Requirements
-
-- **Node.js**: v18 or higher (v22 recommended).
-- **Gemini API Key**: Obtain your free key from [Google AI Studio](https://aistudio.google.com/).
-- **Environment Variable**: Set `GEMINI_API_KEY` in your system or a `.env` file.
-
----
+- **Live Demo**: [QAMANIAI Preview](https://ais-dev-7skjquus5z65hfqxfsjtgo-389440294360.europe-west2.run.app)
+- **GitHub Repository**: [qamanicode/qamaniai](https://github.com/qamanicode/qamaniai)
+- **npm Registry**: [@qamanicode/qamaniai](https://www.npmjs.com/package/@qamanicode/qamaniai)
 
 ## 🤝 Community & Contribution
 
-We believe in the power of open-source. QAMANIAI is built by the community, for the community. Use the following resources to get involved:
-
-*   **Bugs & Enhancements:** Found a bug? Open an issue on our [GitHub Issue Tracker](https://github.com/qamanicode/qamaniai/issues).
-*   **Discussion:** Share your creations and feedback with fellow developers.
-*   **Development:** Check out our [Contributing Guidelines](./CONTRIBUTING.md) to start coding with us!
+Join the revolution of AI-driven development. Check our [CONTRIBUTING.md](CONTRIBUTING.md) to get involved.
 
 ---
 
-## 📜 License
-
-Distributed under the **MIT License**. See `LICENSE` for more information.
-
----
-
-### Crafted with ❤️ by the QAMANIAI Global Team.
-[GitHub Repository](https://github.com/qamanicode/qamaniai) | [NPM Package](https://www.npmjs.com/package/@qamanicode/qamaniai)
+Built with ❤️ by the QAMANIAI Team in partnership with Google AI Studio.

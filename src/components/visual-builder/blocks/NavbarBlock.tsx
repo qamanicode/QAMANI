@@ -8,9 +8,10 @@ interface NavbarBlockProps {
     ctaText: string;
   };
   onUpdate: (newData: any) => void;
+  isDesignMode?: boolean;
 }
 
-export default function NavbarBlock({ data, onUpdate }: NavbarBlockProps) {
+export default function NavbarBlock({ data, onUpdate, isDesignMode = true }: NavbarBlockProps) {
   const updateLink = (index: number, value: string) => {
     const newLinks = [...data.links];
     newLinks[index] = value;
@@ -25,6 +26,7 @@ export default function NavbarBlock({ data, onUpdate }: NavbarBlockProps) {
           text={data.logoText} 
           onSave={(val) => onUpdate({ logoText: val })} 
           className="font-bold text-text"
+          editable={isDesignMode}
         />
       </div>
       <div className="hidden md:flex items-center gap-6">
@@ -34,6 +36,7 @@ export default function NavbarBlock({ data, onUpdate }: NavbarBlockProps) {
             text={link} 
             onSave={(val) => updateLink(i, val)} 
             className="text-sm text-grey hover:text-accent cursor-pointer px-2"
+            editable={isDesignMode}
           />
         ))}
       </div>
@@ -41,6 +44,7 @@ export default function NavbarBlock({ data, onUpdate }: NavbarBlockProps) {
         <EditableText 
           text={data.ctaText} 
           onSave={(val) => onUpdate({ ctaText: val })} 
+          editable={isDesignMode}
         />
       </button>
     </nav>

@@ -53,11 +53,23 @@ export default defineConfig({
 
   // 3. index.html
   const indexHtml = `<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QAMANIAI Site</title>
+    <meta name="description" content="SEO optimized site built with QAMANIAI AI Platform." />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="QAMANIAI Generated Site" />
+    <meta property="og:description" content="A professional website generated using Gemini 1.5 Flash AI." />
+    <meta property="og:type" content="website" />
+    <title>QAMANIAI Site | High-Performance Built</title>
+    <script>
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+      } else {
+          document.documentElement.classList.remove('dark')
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
@@ -66,6 +78,14 @@ export default defineConfig({
 </html>
 `;
   zip.file("index.html", indexHtml);
+
+  // 3.1 vercel.json for direct deployment
+  const vercelJson = {
+    "version": 2,
+    "framework": "vite",
+    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  };
+  zip.file("vercel.json", JSON.stringify(vercelJson, null, 2));
 
   // 4. src/index.css
   const indexCss = `@import "tailwindcss";
@@ -91,7 +111,8 @@ export default defineConfig({
 }
 
 body {
-  @apply bg-primary text-text font-sans antialiased;
+  @apply bg-white text-slate-900 font-sans antialiased transition-colors duration-300;
+  @apply dark:bg-slate-950 dark:text-white;
 }
 `;
   zip.file("src/index.css", indexCss);
@@ -150,18 +171,52 @@ export default function App() {
   const generateStaticBlock = (type: string) => {
     switch(type) {
         case 'navbar': return `
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Sun, Moon } from 'lucide-react';
+
 export default function NavbarBlock({ data }) {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains('dark'));
+  }, []);
+
+  const toggleDark = () => {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('color-theme', 'light');
+      setDark(false);
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('color-theme', 'dark');
+      setDark(true);
+    }
+  };
+
   return (
-    <nav className="w-full py-4 px-6 flex items-center justify-between border-b border-white/10 bg-slate/50 backdrop-blur-md">
+    <nav className="w-full py-4 px-6 flex items-center justify-between border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">
       <div className="flex items-center gap-2">
         <div className="w-8 h-8 rounded bg-[#646cff] flex items-center justify-center text-white font-bold">Q</div>
-        <span className="font-bold text-white">{data.logoText}</span>
+        <span className="font-bold text-slate-900 dark:text-white">{data.logoText}</span>
       </div>
       <div className="hidden md:flex items-center gap-6">
-        {data.links.map((link, i) => <span key={i} className="text-sm text-[#94a3b8] hover:text-[#646cff] cursor-pointer">{link}</span>)}
+        {data.links.map((link, i) => (
+          <span key={i} className="text-sm text-slate-600 dark:text-slate-400 hover:text-[#646cff] cursor-pointer">
+            {link}
+          </span>
+        ))}
       </div>
-      <button className="px-4 py-1.5 rounded-full bg-[#646cff]/10 border border-[#646cff]/20 text-[#646cff] text-xs font-medium">{data.ctaText}</button>
+      <div className="flex items-center gap-4">
+        <button 
+          onClick={toggleDark}
+          className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+        >
+          {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        </button>
+        <button className="px-4 py-1.5 rounded-full bg-[#646cff] text-white text-xs font-medium shadow-lg shadow-[#646cff]/20">
+          {data.ctaText}
+        </button>
+      </div>
     </nav>
   );
 }`;
@@ -170,23 +225,23 @@ import React from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 export default function HeroBlock({ data }) {
   return (
-    <div className="w-full py-20 px-10 flex flex-col md:flex-row items-center gap-12">
-      <div className="flex-1 space-y-6 text-right" dir="rtl">
+    <div className="w-full py-20 px-10 flex flex-col md:flex-row items-center gap-12 bg-white dark:bg-slate-950 transition-colors duration-300">
+      <div className="flex-1 space-y-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#646cff]/10 border border-[#646cff]/20 text-[#646cff] text-xs">
           <Sparkles className="w-3 h-3" />
           <span>{data.badge}</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">{data.title}</h1>
-        <p className="text-[#94a3b8] text-lg max-w-lg">{data.subtitle}</p>
+        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">{data.title}</h1>
+        <p className="text-slate-600 dark:text-slate-400 text-lg max-w-lg">{data.subtitle}</p>
         <div className="flex items-center gap-4 pt-4">
-          <button className="px-8 py-3 rounded-full bg-[#646cff] text-white font-bold">{data.primaryCta}</button>
-          <button className="px-8 py-3 rounded-full border border-white/10 text-white flex items-center gap-2">
+          <button className="px-8 py-3 rounded-full bg-[#646cff] text-white font-bold shadow-xl shadow-[#646cff]/30 hover:scale-105 transition-transform">{data.primaryCta}</button>
+          <button className="px-8 py-3 rounded-full border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-white/5 transition-all">
             <span>{data.secondaryCta}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>
-      <div className="flex-1 w-full max-w-md aspect-square rounded-3xl overflow-hidden relative">
+      <div className="flex-1 w-full max-w-md aspect-square rounded-3xl overflow-hidden relative shadow-2xl">
         <img src={data.imageUrl} className="w-full h-full object-cover" />
       </div>
     </div>

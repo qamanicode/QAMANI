@@ -11,9 +11,10 @@ interface HeroBlockProps {
     imageUrl: string;
   };
   onUpdate: (newData: any) => void;
+  isDesignMode?: boolean;
 }
 
-export default function HeroBlock({ data, onUpdate }: HeroBlockProps) {
+export default function HeroBlock({ data, onUpdate, isDesignMode = true }: HeroBlockProps) {
   return (
     <div className="w-full py-20 px-10 flex flex-col md:flex-row items-center gap-12 bg-gradient-to-br from-primary to-slate/20">
       <div className="flex-1 space-y-6 text-right" dir="rtl">
@@ -22,6 +23,7 @@ export default function HeroBlock({ data, onUpdate }: HeroBlockProps) {
           <EditableText 
             text={data.badge} 
             onSave={(val) => onUpdate({ badge: val })} 
+            editable={isDesignMode}
           />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-text leading-tight">
@@ -29,6 +31,7 @@ export default function HeroBlock({ data, onUpdate }: HeroBlockProps) {
             text={data.title} 
             onSave={(val) => onUpdate({ title: val })} 
             tagName="h1"
+            editable={isDesignMode}
           />
         </h1>
         <p className="text-grey text-lg max-w-lg">
@@ -36,6 +39,7 @@ export default function HeroBlock({ data, onUpdate }: HeroBlockProps) {
             text={data.subtitle} 
             onSave={(val) => onUpdate({ subtitle: val })} 
             tagName="p"
+            editable={isDesignMode}
           />
         </p>
         <div className="flex items-center gap-4 pt-4">
@@ -43,12 +47,14 @@ export default function HeroBlock({ data, onUpdate }: HeroBlockProps) {
             <EditableText 
               text={data.primaryCta} 
               onSave={(val) => onUpdate({ primaryCta: val })} 
+              editable={isDesignMode}
             />
           </button>
           <button className="px-8 py-3 rounded-full border border-nickel text-text hover:bg-white/5 transition-colors flex items-center gap-2">
             <EditableText 
               text={data.secondaryCta} 
               onSave={(val) => onUpdate({ secondaryCta: val })} 
+              editable={isDesignMode}
             />
             <ArrowRight className="w-4 h-4" />
           </button>

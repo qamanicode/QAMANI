@@ -1,0 +1,42 @@
+name: Bug Report
+description: File a report to help us improve QAMANIAI
+title: "[BUG]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: QAMANIAI Version
+      description: Which version of the tool are you using?
+      placeholder: e.g., 1.0.6
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How did you encounter this bug?
+      placeholder: |
+        1. Open the Visual Builder
+        2. Click on 'Generate'
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Please copy and paste any relevant log output or screenshots.
+      render: shell

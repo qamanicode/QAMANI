@@ -7,9 +7,10 @@ interface FooterBlockProps {
     copyright: string;
   };
   onUpdate: (newData: any) => void;
+  isDesignMode?: boolean;
 }
 
-export default function FooterBlock({ data, onUpdate }: FooterBlockProps) {
+export default function FooterBlock({ data, onUpdate, isDesignMode = true }: FooterBlockProps) {
   return (
     <footer className="w-full py-12 px-10 bg-slate/50 border-t border-nickel/10">
       <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8" dir="rtl">
@@ -20,6 +21,7 @@ export default function FooterBlock({ data, onUpdate }: FooterBlockProps) {
               text={data.logoText} 
               onSave={(val) => onUpdate({ logoText: val })} 
               className="font-bold text-text text-xl tracking-wider px-2"
+              editable={isDesignMode}
             />
           </div>
           <p className="text-grey text-sm max-w-xs text-center md:text-right">
@@ -27,22 +29,23 @@ export default function FooterBlock({ data, onUpdate }: FooterBlockProps) {
               text={data.desc} 
               onSave={(val) => onUpdate({ desc: val })} 
               tagName="p"
+              editable={isDesignMode}
             />
           </p>
         </div>
         <div className="flex gap-12">
           <div className="space-y-3 text-center md:text-right">
-            <h4 className="font-bold text-text text-sm uppercase tracking-widest text-grey">المنتجات</h4>
+            <h4 className="font-bold text-text text-sm uppercase tracking-widest text-grey">Products</h4>
             <div className="flex flex-col gap-2 text-xs text-grey">
-              <span className="hover:text-accent cursor-pointer">المنشئ</span>
-              <span className="hover:text-accent cursor-pointer">الذكاء الاصطناعي</span>
+              <span className="hover:text-accent cursor-pointer">Builder</span>
+              <span className="hover:text-accent cursor-pointer">AI Engine</span>
             </div>
           </div>
           <div className="space-y-3 text-center md:text-right">
-            <h4 className="font-bold text-text text-sm uppercase tracking-widest text-grey">الشركة</h4>
+            <h4 className="font-bold text-text text-sm uppercase tracking-widest text-grey">Company</h4>
             <div className="flex flex-col gap-2 text-xs text-grey">
-              <span className="hover:text-accent cursor-pointer">من نحن</span>
-              <span className="hover:text-accent cursor-pointer">اتصل بنا</span>
+              <span className="hover:text-accent cursor-pointer">About</span>
+              <span className="hover:text-accent cursor-pointer">Contact</span>
             </div>
           </div>
         </div>
@@ -52,6 +55,7 @@ export default function FooterBlock({ data, onUpdate }: FooterBlockProps) {
           text={data.copyright} 
           onSave={(val) => onUpdate({ copyright: val })} 
           className="text-[10px] text-grey/50"
+          editable={isDesignMode}
         />
       </div>
     </footer>

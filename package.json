@@ -1,7 +1,7 @@
 {
   "name": "@qamanicode/qamaniai",
-  "version": "1.0.5",
-  "description": "The ultimate AI-powered website builder. Generate, visualize, and export professional websites in seconds using Gemini AI.",
+  "version": "1.0.9",
+  "description": "The elite AI-powered low-code platform. Build, visualize, and deploy SEO-optimized websites in seconds using Gemini 1.5 Flash.",
   "type": "module",
   "bin": {
     "qamaniai": "./bin/cli.js"
@@ -18,14 +18,15 @@
   "keywords": [
     "ai",
     "visual-builder",
-    "website-generator",
-    "react",
-    "typescript",
+    "website-builder",
     "low-code",
     "no-code",
-    "gemini",
+    "gemini-ai",
+    "react",
+    "typescript",
     "tailwindcss",
-    "cli"
+    "seo-friendly",
+    "vercel-ready"
   ],
   "author": "QAMANIAI Team",
   "license": "MIT",

@@ -11,9 +11,10 @@ interface PricingBlockProps {
     }[];
   };
   onUpdate: (newData: any) => void;
+  isDesignMode?: boolean;
 }
 
-export default function PricingBlock({ data, onUpdate }: PricingBlockProps) {
+export default function PricingBlock({ data, onUpdate, isDesignMode = true }: PricingBlockProps) {
   const updatePlan = (index: number, field: string, value: any) => {
     const newPlans = [...data.plans];
     newPlans[index] = { ...newPlans[index], [field]: value };
@@ -39,6 +40,7 @@ export default function PricingBlock({ data, onUpdate }: PricingBlockProps) {
                 text={plan.name} 
                 onSave={(val) => updatePlan(i, 'name', val)} 
                 tagName="h3"
+                editable={isDesignMode}
               />
             </h3>
             <div className="flex items-baseline gap-1 mb-6">
@@ -46,6 +48,7 @@ export default function PricingBlock({ data, onUpdate }: PricingBlockProps) {
                 <EditableText 
                   text={plan.price} 
                   onSave={(val) => updatePlan(i, 'price', val)} 
+                  editable={isDesignMode}
                 />
               </span>
               <span className="text-grey text-sm">/شهرياً</span>
@@ -58,6 +61,7 @@ export default function PricingBlock({ data, onUpdate }: PricingBlockProps) {
                     text={f} 
                     onSave={(val) => updateFeature(i, j, val)} 
                     className="text-sm text-grey"
+                    editable={isDesignMode}
                   />
                 </div>
               ))}

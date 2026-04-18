@@ -36,6 +36,11 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { exportProject } from '../lib/exportUtils';
+import { TEMPLATES } from '../lib/templates';
+import { Zap } from 'lucide-react';
+import CommandBar from './visual-builder/CommandBar';
+import VisionUploader from './visual-builder/VisionUploader';
+import { BlockData } from '../services/aiService';
 
 // Block Components
 import NavbarBlock from './visual-builder/blocks/NavbarBlock';
@@ -110,10 +115,11 @@ const blockIcons: Record<BlockType, any> = {
   footer: Layout,
 };
 
-function SortableBlock({ block, onRemove, onUpdate }: { 
+function SortableBlock({ block, onRemove, onUpdate, isDesignMode }: { 
   block: Block; 
   onRemove: (id: string) => void;
   onUpdate: (id: string, newData: any) => void;
+  isDesignMode: boolean;
 }) {
   const {
     attributes,
@@ -137,35 +143,43 @@ function SortableBlock({ block, onRemove, onUpdate }: {
     <div 
       ref={setNodeRef} 
       style={style} 
-      className={`group relative border-b border-nickel/30 last:border-none ${isDragging ? 'opacity-50 shadow-2xl' : ''}`}
+      className={`group relative border-b border-nickel/30 last:border-none ${isDragging ? 'opacity-50 shadow-2xl transition-shadow' : ''}`}
     >
       <div className="relative z-0">
-        <Component data={block.data} onUpdate={(newData: any) => onUpdate(block.id, newData)} />
+        <Component 
+          data={block.data} 
+          onUpdate={(newData: any) => onUpdate(block.id, newData)} 
+          isDesignMode={isDesignMode}
+        />
       </div>
 
       {/* Drag Handle */}
-      <div 
-        {...attributes} 
-        {...listeners} 
-        className="absolute top-1/2 left-4 -translate-y-1/2 flex flex-col gap-1.5 p-3 rounded-lg bg-slate/50 border border-nickel opacity-0 group-hover:opacity-100 z-30 cursor-grab active:cursor-grabbing transition-opacity shadow-lg"
-      >
-        <div className="w-1 h-1 rounded-full bg-accent" />
-        <div className="w-1 h-1 rounded-full bg-accent" />
-        <div className="w-1 h-1 rounded-full bg-accent" />
-      </div>
+      {isDesignMode && (
+        <div 
+          {...attributes} 
+          {...listeners} 
+          className="absolute top-1/2 left-4 -translate-y-1/2 flex flex-col gap-1.5 p-3 rounded-lg bg-slate/50 border border-nickel opacity-0 group-hover:opacity-100 z-30 cursor-grab active:cursor-grabbing transition-opacity shadow-lg"
+        >
+          <div className="w-1 h-1 rounded-full bg-accent" />
+          <div className="w-1 h-1 rounded-full bg-accent" />
+          <div className="w-1 h-1 rounded-full bg-accent" />
+        </div>
+      )}
 
       {/* Block Controls */}
-      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-        <div className="p-2 rounded-lg bg-slate border border-nickel text-grey">
-          <Layers className="w-4 h-4" />
+      {isDesignMode && (
+        <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+          <div className="p-2 rounded-lg bg-slate border border-nickel text-grey">
+            <Layers className="w-4 h-4" />
+          </div>
+          <button 
+            onClick={() => onRemove(block.id)}
+            className="p-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
         </div>
-        <button 
-          onClick={() => onRemove(block.id)}
-          className="p-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg"
-        >
-          <Trash2 className="w-4 h-4" />
-        </button>
-      </div>
+      )}
       
     </div>
   );
@@ -176,6 +190,7 @@ export default function VisualBuilder() {
   const [viewMode, setViewMode] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
   const [showLibrary, setShowLibrary] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [isDesignMode, setIsDesignMode] = useState(true);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -240,6 +255,15 @@ export default function VisualBuilder() {
     setShowLibrary(false);
   };
 
+  const handleAiLayout = (blocks: BlockData[]) => {
+    const formattedBlocks: Block[] = blocks.map(b => ({
+      id: Math.random().toString(36).substr(2, 9),
+      type: b.type as BlockType,
+      data: b.data
+    }));
+    setCanvasBlocks(formattedBlocks);
+  };
+
   return (
     <section className="py-24 border-t border-nickel bg-primary relative overflow-hidden">
       <div className="wrapper px-10">
@@ -251,13 +275,13 @@ export default function VisualBuilder() {
             className="space-y-4"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-text tracking-tight">
-              منشئ المواقع البصري <br />
+              Integrated Visual Builder <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#41d1ff] to-[#bd34fe]">
-                اسحب، أفلت، وانشر
+                Design, Edit & Scale
               </span>
             </h2>
             <p className="text-grey text-lg max-w-2xl mx-auto">
-              أنشئ قوالب مواقع متجاوبة واحترافية دون كتابة سطر كود واحد. استخدم مكتبة القوالب الجاهزة أو ابدأ من الصفر.
+              Create professional, SEO-optimized layouts without writing code. Use Gemini power to generate sections.
             </p>
           </motion.div>
         </div>
@@ -270,8 +294,8 @@ export default function VisualBuilder() {
                 onClick={() => setShowLibrary(true)}
                 className="button button--primary py-2 px-4 text-sm gap-2"
               >
-                <Library className="w-4 h-4" />
-                مكتبة القوالب
+                <Zap className="w-4 h-4" />
+                Templates Engine
               </button>
               <div className="h-6 w-px bg-nickel" />
               <div className="flex bg-primary rounded-lg p-1 border border-nickel">
@@ -290,6 +314,13 @@ export default function VisualBuilder() {
             </div>
 
             <div className="flex items-center gap-3">
+              <button 
+                onClick={() => setIsDesignMode(!isDesignMode)}
+                className={`p-2 rounded-lg transition-colors ${isDesignMode ? 'bg-accent/20 text-accent' : 'text-grey hover:text-text'}`}
+                title="Quick Edit Mode"
+              >
+                <MousePointer2 className="w-5 h-5" />
+              </button>
               <button className="p-2 text-grey hover:text-text transition-colors">
                 <Eye className="w-5 h-5" />
               </button>
@@ -299,22 +330,26 @@ export default function VisualBuilder() {
                 className="button py-2 px-4 text-sm gap-2 border-accent/30 text-accent disabled:opacity-50 disabled:cursor-not-allowed group"
               >
                 <Download className={`w-4 h-4 ${isExporting ? 'animate-bounce' : 'group-hover:-translate-y-1 transition-transform'}`} />
-                {isExporting ? 'جاري التصدير...' : 'تصدير الكود'}
+                {isExporting ? 'Exporting...' : 'Export to Vercel'}
               </button>
             </div>
           </div>
 
+          <CommandBar onLayoutGenerated={handleAiLayout} />
+
           <div className="flex flex-grow overflow-hidden">
             {/* Sidebar Elements */}
             <div className="w-64 bg-primary/30 border-r border-nickel p-6 flex flex-col gap-6 overflow-y-auto">
-              <h4 className="text-xs font-mono uppercase tracking-widest text-grey">العناصر المتاحة</h4>
+              <h4 className="text-xs font-mono uppercase tracking-widest text-grey">AI Vision</h4>
+              <VisionUploader onLayoutGenerated={handleAiLayout} />
+              
+              <h4 className="text-xs font-mono uppercase tracking-widest text-grey">Components</h4>
               <div className="grid gap-3">
                 {(['navbar', 'hero', 'features', 'pricing', 'footer'] as BlockType[]).map((type) => (
                   <button
                     key={type}
                     onClick={() => addBlock(type)}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-slate border border-nickel hover:border-accent/50 hover:bg-slate/80 transition-all group text-right"
-                    dir="rtl"
+                    className="flex items-center gap-3 p-3 rounded-xl bg-slate border border-nickel hover:border-accent/50 hover:bg-slate/80 transition-all group"
                   >
                     <div className="p-2 rounded-lg bg-primary border border-nickel text-grey group-hover:text-accent">
                       {(() => {
@@ -323,15 +358,15 @@ export default function VisualBuilder() {
                       })()}
                     </div>
                     <span className="text-sm font-medium text-text capitalize">{type}</span>
-                    <Plus className="w-3 h-3 text-grey mr-auto" />
+                    <Plus className="w-3 h-3 text-grey ml-auto" />
                   </button>
                 ))}
               </div>
 
               <div className="mt-auto p-4 rounded-2xl bg-accent/5 border border-accent/20">
-                <p className="text-xs text-accent font-medium mb-2">نصيحة ذكية</p>
+                <p className="text-xs text-accent font-medium mb-2">Pro Tip</p>
                 <p className="text-[10px] text-grey leading-relaxed">
-                  يمكنك سحب العناصر مباشرة إلى منطقة العمل لترتيبها كما تشاء.
+                  You can drag components directly on the canvas to reorder them in real-time.
                 </p>
               </div>
             </div>
@@ -350,8 +385,8 @@ export default function VisualBuilder() {
                       <MousePointer2 className="w-8 h-8 text-grey/30" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-text">منطقة العمل فارغة</h3>
-                      <p className="text-grey text-sm max-w-xs">ابدأ بإضافة عناصر من القائمة الجانبية أو اختر قالباً جاهزاً.</p>
+                      <h3 className="text-xl font-bold text-text">Canvas is Empty</h3>
+                      <p className="text-grey text-sm max-w-xs">Start by adding components from the sidebar or choose a template.</p>
                     </div>
                   </div>
                 ) : (
@@ -372,6 +407,7 @@ export default function VisualBuilder() {
                               block={block} 
                               onRemove={removeBlock} 
                               onUpdate={updateBlockData}
+                              isDesignMode={isDesignMode}
                             />
                           ))}
                         </AnimatePresence>
@@ -403,8 +439,8 @@ export default function VisualBuilder() {
               >
                 <div className="p-8 border-b border-nickel flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Library className="w-6 h-6 text-accent" />
-                    <h3 className="text-2xl font-bold text-text">مكتبة القوالب الجاهزة</h3>
+                    <Sparkles className="w-6 h-6 text-accent" />
+                    <h3 className="text-2xl font-bold text-text">Advanced Template Engine</h3>
                   </div>
                   <button 
                     onClick={() => setShowLibrary(false)}
@@ -415,29 +451,19 @@ export default function VisualBuilder() {
                 </div>
                 
                 <div className="p-8 grid md:grid-cols-3 gap-8">
-                  {templateLibrary.map((template) => (
+                  {TEMPLATES.map((template) => (
                     <motion.div
                       key={template.id}
                       whileHover={{ y: -10 }}
-                      className="group cursor-pointer"
-                      onClick={() => loadTemplate(template.blocks)}
+                      className="group p-6 rounded-2xl bg-primary border border-nickel hover:border-accent cursor-pointer transition-all"
+                      onClick={() => loadTemplate(['navbar', 'hero', 'features', 'footer'])}
                     >
-                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-nickel mb-4">
-                        <img 
-                          src={template.image} 
-                          alt={template.name} 
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <div className="button button--primary py-2 px-4 text-sm gap-2">
-                            استخدام القالب
-                            <ChevronRight className="w-4 h-4" />
-                          </div>
-                        </div>
+                      <Sparkles className="w-8 h-8 text-accent mb-4" />
+                      <h4 className="text-xl font-bold text-text mb-2">{template.name}</h4>
+                      <p className="text-sm text-grey mb-6">{template.description}</p>
+                      <div className="button button--primary w-full text-sm">
+                        Apply Template
                       </div>
-                      <h4 className="text-lg font-bold text-text mb-1">{template.name}</h4>
-                      <p className="text-xs text-grey">{template.blocks.length} عناصر متجاوبة</p>
                     </motion.div>
                   ))}
                 </div>
