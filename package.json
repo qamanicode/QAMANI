@@ -1,6 +1,6 @@
 {
   "name": "qamaniai",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "أداة بناء مواقع مدعومة بالذكاء الاصطناعي لبناء المشاريع في ثوانٍ",
   "type": "module",
   "bin": {
