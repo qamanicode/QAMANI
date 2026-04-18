@@ -1,7 +1,7 @@
 {
   "name": "@qamanicode/qamaniai",
-  "version": "1.0.4",
-  "description": "أداة بناء مواقع مدعومة بالذكاء الاصطناعي لبناء المشاريع في ثوانٍ",
+  "version": "1.0.5",
+  "description": "The ultimate AI-powered website builder. Generate, visualize, and export professional websites in seconds using Gemini AI.",
   "type": "module",
   "bin": {
     "qamaniai": "./bin/cli.js"
@@ -9,16 +9,23 @@
   "main": "./src/main.tsx",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qamanicode/qamaniai.git"
+    "url": "https://github.com/qamanicode/qamaniai"
   },
+  "bugs": {
+    "url": "https://github.com/qamanicode/qamaniai/issues"
+  },
+  "homepage": "https://github.com/qamanicode/qamaniai#readme",
   "keywords": [
-    "cli",
     "ai",
-    "generator",
-    "website-builder",
-    "qamaniai",
+    "visual-builder",
+    "website-generator",
+    "react",
+    "typescript",
+    "low-code",
+    "no-code",
     "gemini",
-    "tailwindcss"
+    "tailwindcss",
+    "cli"
   ],
   "author": "QAMANIAI Team",
   "license": "MIT",
