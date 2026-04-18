@@ -36,7 +36,7 @@ export default function AIGenerator() {
           if (prev < generationSteps.length - 1) return prev + 1;
           clearInterval(interval);
           setIsGenerating(false);
-          setResult(`npx qamanai init --template dynamic --prompt "${prompt}"`);
+          setResult(`npx qamaniai init --template dynamic --prompt "${prompt}"`);
           return prev;
         });
       }, 800);
@@ -74,13 +74,13 @@ export default function AIGenerator() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-4">
               <Sparkles className="w-4 h-4" />
-              <span>جديد: QAMANI AI</span>
+              <span>جديد: QAMANIAI AI</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-bold text-text tracking-tight">
               حول فكرتك إلى تطبيق في ثوانٍ
             </h2>
             <p className="text-grey text-lg max-w-2xl mx-auto">
-              أخبر QAMANI بما تريد بناءه، وسيقوم الذكاء الاصطناعي بتوليد الكود وتجهيز التطبيق لك تلقائياً وبدقة عالية.
+              أخبر QAMANIAI بما تريد بناءه، وسيقوم الذكاء الاصطناعي بتوليد الكود وتجهيز التطبيق لك تلقائياً وبدقة عالية.
             </p>
           </motion.div>
 
@@ -229,7 +229,7 @@ export default function AIGenerator() {
             </div>
             <h3 className="text-2xl font-bold text-text">أمان وموثوقية كاملة</h3>
             <p className="text-grey leading-relaxed">
-              نحن نلتزم بأعلى معايير الأمان. QAMANAI متوافق تماماً مع معايير <span className="text-text font-bold">SOC 2 Type II</span>، مما يضمن حماية بياناتك وكودك المصدري بأفضل التقنيات العالمية.
+              نحن نلتزم بأعلى معايير الأمان. QAMANIAI متوافق تماماً مع معايير <span className="text-text font-bold">SOC 2 Type II</span>، مما يضمن حماية بياناتك وكودك المصدري بأفضل التقنيات العالمية.
             </p>
           </motion.div>
 
@@ -248,7 +248,7 @@ export default function AIGenerator() {
                 { label: 'دليل البدء السريع', icon: Globe, desc: 'ابدأ مشروعك الأول في دقائق', tooltip: 'دليل خطوة بخطوة للمبتدئين لإعداد بيئة العمل وبدء أول تطبيق.' },
                 { label: 'أمثلة متقدمة', icon: Code2, desc: 'استكشف حالات استخدام معقدة', tooltip: 'مجموعة من المشاريع الجاهزة التي تستخدم تقنيات متقدمة مثل WebAssembly و Workers.' },
                 { label: 'مجتمع المطورين', icon: Sparkles, desc: 'تواصل مع آلاف المطورين', tooltip: 'انضم إلى ديسكورد وتفاعل مع مطورين آخرين لتبادل الخبرات وحل المشكلات.' },
-                { label: 'وثائق الـ API', icon: Layout, desc: 'مرجع شامل لجميع الوظائف', tooltip: 'توثيق تقني عميق لكل الدوال والمكونات المتاحة في QAMANAI.' },
+                { label: 'وثائق الـ API', icon: Layout, desc: 'مرجع شامل لجميع الوظائف', tooltip: 'توثيق تقني عميق لكل الدوال والمكونات المتاحة في QAMANIAI.' },
               ].map((item, i) => (
                 <div key={i} className="relative group/item">
                   <a 

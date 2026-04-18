@@ -33,7 +33,7 @@ export default function Features() {
       <div className="wrapper border-x border-nickel">
         <div className="px-10 py-20 text-center md:text-left">
           <h2 className="text-4xl md:text-5xl font-bold text-text mb-4">إعادة تعريف تجربة المطور</h2>
-          <p className="text-grey text-lg">QAMANAI يجعل تطوير الويب ممتعاً مرة أخرى</p>
+          <p className="text-grey text-lg">QAMANIAI يجعل تطوير الويب ممتعاً مرة أخرى</p>
         </div>
 
         <div className="grid lg:grid-cols-2 divide-x divide-y divide-nickel border-t border-nickel">

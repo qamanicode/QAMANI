@@ -49,7 +49,7 @@ export default function Frameworks() {
               دعم شامل لجميع أطر العمل
             </h2>
             <p className="text-grey text-lg max-w-2xl mx-auto">
-              QAMANAI يعمل بسلاسة مع الأدوات التي تحبها، مما يوفر لك بيئة تطوير عالمية ومستقرة.
+              QAMANIAI يعمل بسلاسة مع الأدوات التي تحبها، مما يوفر لك بيئة تطوير عالمية ومستقرة.
             </p>
           </motion.div>
         </div>

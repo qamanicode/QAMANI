@@ -11,11 +11,11 @@ interface SearchResult {
 }
 
 const mockDocs: SearchResult[] = [
-  { id: '1', title: 'Getting Started', category: 'Guide', content: 'Learn how to install and set up QAMANAI.', href: '#' },
+  { id: '1', title: 'Getting Started', category: 'Guide', content: 'Learn how to install and set up QAMANIAI.', href: '#' },
   { id: '2', title: 'Configuration Reference', category: 'Config', content: 'Detailed documentation for all configuration options.', href: '#' },
-  { id: '3', title: 'Plugin API', category: 'Plugins', content: 'How to write your own plugins for QAMANAI.', href: '#' },
-  { id: '4', title: 'HMR (Hot Module Replacement)', category: 'Guide', content: 'Understanding how HMR works in QAMANAI.', href: '#' },
-  { id: '5', title: 'Vite Comparison', category: 'Guide', content: 'How QAMANAI differs from Vite and other build tools.', href: '#' },
+  { id: '3', title: 'Plugin API', category: 'Plugins', content: 'How to write your own plugins for QAMANIAI.', href: '#' },
+  { id: '4', title: 'HMR (Hot Module Replacement)', category: 'Guide', content: 'Understanding how HMR works in QAMANIAI.', href: '#' },
+  { id: '5', title: 'Vite Comparison', category: 'Guide', content: 'How QAMANIAI differs from Vite and other build tools.', href: '#' },
   { id: '6', title: 'Environment Variables', category: 'Config', content: 'Using .env files and environment variables.', href: '#' },
   { id: '7', title: 'Static Asset Handling', category: 'Guide', content: 'Importing and serving static assets.', href: '#' },
   { id: '8', title: 'Build Optimization', category: 'Guide', content: 'Tips for optimizing your production builds.', href: '#' },

@@ -46,7 +46,7 @@ export default function Sponsors() {
               مجاني ومفتوح المصدر
             </h2>
             <p className="text-grey text-lg md:text-xl leading-relaxed max-w-2xl">
-              برنامج <span className="text-text font-semibold">QAMANAI</span> مرخص بموجب ترخيص MIT وسيظل دائمًا مجانيًا ومفتوح المصدر. هذا بفضل مساهماتكم ودعمكم لهذه الشركات:
+              برنامج <span className="text-text font-semibold">QAMANIAI</span> مرخص بموجب ترخيص MIT وسيظل دائمًا مجانيًا ومفتوح المصدر. هذا بفضل مساهماتكم ودعمكم لهذه الشركات:
             </p>
             
             <div className="flex flex-wrap justify-center lg:justify-start gap-4">

@@ -63,7 +63,7 @@ export default function Header() {
             <div className="w-8 h-8 bg-gradient-to-br from-[#41d1ff] to-[#bd34fe] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">Q</span>
             </div>
-            <span className="text-xl font-bold tracking-tight text-text">QAMANAI</span>
+            <span className="text-xl font-bold tracking-tight text-text">QAMANIAI</span>
           </a>
 
           <nav className="hidden lg:flex items-center gap-1">

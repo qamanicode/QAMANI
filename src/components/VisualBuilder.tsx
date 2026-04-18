@@ -35,6 +35,7 @@ import {
   useSortable
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { exportProject } from '../lib/exportUtils';
 
 // Block Components
 import NavbarBlock from './visual-builder/blocks/NavbarBlock';
@@ -61,7 +62,7 @@ const blockComponents: Record<BlockType, React.ComponentType<any>> = {
 
 const defaultData: Record<BlockType, any> = {
   navbar: {
-    logoText: 'QAMANAI',
+    logoText: 'QAMANIAI',
     links: ['الرئيسية', 'المميزات', 'الأسعار'],
     ctaText: 'ابدأ الآن'
   },
@@ -89,9 +90,9 @@ const defaultData: Record<BlockType, any> = {
     ]
   },
   footer: {
-    logoText: 'QAMANAI',
+    logoText: 'QAMANIAI',
     desc: 'نحن نصنع المستقبل الرقمي بأدوات بسيطة وقوية للجميع.',
-    copyright: '© 2026 QAMANAI. جميع الحقوق محفوظة.'
+    copyright: '© 2026 QAMANIAI. جميع الحقوق محفوظة.'
   }
 };
 
@@ -174,6 +175,7 @@ export default function VisualBuilder() {
   const [canvasBlocks, setCanvasBlocks] = useState<Block[]>([]);
   const [viewMode, setViewMode] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
   const [showLibrary, setShowLibrary] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -214,6 +216,18 @@ export default function VisualBuilder() {
 
   const removeBlock = (id: string) => {
     setCanvasBlocks(canvasBlocks.filter(b => b.id !== id));
+  };
+
+  const handleExport = async () => {
+    if (canvasBlocks.length === 0) return;
+    setIsExporting(true);
+    try {
+      await exportProject(canvasBlocks);
+    } catch (error) {
+      console.error('Export failed:', error);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   const loadTemplate = (blocks: string[]) => {
@@ -279,9 +293,13 @@ export default function VisualBuilder() {
               <button className="p-2 text-grey hover:text-text transition-colors">
                 <Eye className="w-5 h-5" />
               </button>
-              <button className="button py-2 px-4 text-sm gap-2 border-accent/30 text-accent">
-                <Download className="w-4 h-4" />
-                تصدير الكود
+              <button 
+                onClick={handleExport}
+                disabled={isExporting || canvasBlocks.length === 0}
+                className="button py-2 px-4 text-sm gap-2 border-accent/30 text-accent disabled:opacity-50 disabled:cursor-not-allowed group"
+              >
+                <Download className={`w-4 h-4 ${isExporting ? 'animate-bounce' : 'group-hover:-translate-y-1 transition-transform'}`} />
+                {isExporting ? 'جاري التصدير...' : 'تصدير الكود'}
               </button>
             </div>
           </div>

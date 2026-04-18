@@ -8,10 +8,10 @@ export default function Hero() {
   const [copied, setCopied] = useState(false);
 
   const tabs = [
-    { id: 'npm', label: 'npm', command: 'npm create qamanai@latest' },
-    { id: 'yarn', label: 'Yarn', command: 'yarn create qamanai' },
-    { id: 'pnpm', label: 'pnpm', command: 'pnpm create qamanai' },
-    { id: 'bun', label: 'Bun', command: 'bun create qamanai' },
+    { id: 'npm', label: 'npm', command: 'npm create qamaniai@latest' },
+    { id: 'yarn', label: 'Yarn', command: 'yarn create qamaniai' },
+    { id: 'pnpm', label: 'pnpm', command: 'pnpm create qamaniai' },
+    { id: 'bun', label: 'Bun', command: 'bun create qamaniai' },
   ];
 
   const copyToClipboard = () => {
@@ -23,10 +23,10 @@ export default function Hero() {
 
   const downloadConfig = () => {
     const config = `
-import { defineConfig } from 'qamanai';
-import react from '@qamanai/plugin-react';
+import { defineConfig } from 'qamaniai';
+import react from '@qamaniai/plugin-react';
 
-// QAMANAI Configuration
+// QAMANIAI Configuration
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -41,7 +41,7 @@ export default defineConfig({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'qamanai.config.ts';
+    a.download = 'qamaniai.config.ts';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -71,7 +71,7 @@ export default defineConfig({
           </h1>
           
           <p className="text-grey text-lg md:text-xl max-w-md text-pretty leading-relaxed">
-            QAMANAI is a blazing fast frontend build tool powering the next generation of web applications.
+            QAMANIAI is a blazing fast frontend build tool powering the next generation of web applications.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mt-4">

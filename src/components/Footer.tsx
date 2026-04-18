@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent pointer-events-none" />
         <div className="wrapper px-10 py-20 md:py-32 flex flex-col items-center text-center gap-8 relative z-10">
           <h2 className="text-4xl md:text-6xl font-bold text-text tracking-tight">
-            Start building with QAMANAI
+            Start building with QAMANIAI
           </h2>
           <p className="text-grey text-lg max-w-xl">
             Prepare for a development environment that can finally keep pace with the speed of your mind.
@@ -21,7 +21,7 @@ export default function Footer() {
       <section className="wrapper wrapper--ticks py-16 px-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
           <div>
-            <h4 className="text-grey text-xs font-mono uppercase tracking-widest mb-8">QAMANAI</h4>
+            <h4 className="text-grey text-xs font-mono uppercase tracking-widest mb-8">QAMANIAI</h4>
             <ul className="flex flex-col gap-3">
               {['Guide', 'Config', 'Plugins'].map(item => (
                 <li key={item}><a href="#" className="text-biege hover:text-text transition-colors">{item}</a></li>
@@ -57,7 +57,7 @@ export default function Footer() {
 
       <section className="wrapper wrapper--ticks border-t border-nickel py-8 px-10 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-grey text-sm">
-          © 2019-present VoidZero Inc. and QAMANAI contributors.
+          © 2019-present VoidZero Inc. and QAMANIAI contributors.
         </p>
         <div className="flex gap-8 text-sm text-grey">
           <a href="#" className="hover:text-text transition-colors">Privacy Policy</a>

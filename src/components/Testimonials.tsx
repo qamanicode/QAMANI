@@ -45,7 +45,7 @@ export default function Testimonials() {
           <div className="flex flex-col gap-4">
             <h2 className="text-4xl font-bold text-text">Loved by the community</h2>
             <p className="text-grey text-lg max-w-md">
-              Don't take our word for it - listen to what QAMANAI community members have to say.
+              Don't take our word for it - listen to what QAMANIAI community members have to say.
             </p>
           </div>
           <div className="flex gap-12">

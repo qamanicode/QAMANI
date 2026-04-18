@@ -6,7 +6,7 @@ const cliCommands = [
   {
     id: 'dev',
     title: 'تطوير فوري',
-    command: 'qamanai dev',
+    command: 'qamaniai dev',
     description: 'ابدأ خادم التطوير مع دعم HMR فائق السرعة.',
     icon: Play,
     color: 'text-blue-500',
@@ -14,7 +14,7 @@ const cliCommands = [
   {
     id: 'build',
     title: 'بناء للإنتاج',
-    command: 'qamanai build',
+    command: 'qamaniai build',
     description: 'قم بتحسين الكود وضغطه ليكون جاهزاً للنشر بأعلى أداء.',
     icon: Rocket,
     color: 'text-purple-500',
@@ -22,15 +22,15 @@ const cliCommands = [
   {
     id: 'deploy',
     title: 'نشر سحابي',
-    command: 'qamanai deploy',
-    description: 'انشر موقعك على سحابة QAMANAI بضغطة زر واحدة.',
+    command: 'qamaniai deploy',
+    description: 'انشر موقعك على سحابة QAMANIAI بضغطة زر واحدة.',
     icon: Globe,
     color: 'text-green-500',
   },
   {
     id: 'ai',
     title: 'توليد ذكي',
-    command: 'qamanai ai "متجر إلكتروني"',
+    command: 'qamaniai ai "متجر إلكتروني"',
     description: 'استخدم قوة الذكاء الاصطناعي لتوليد المكونات والصفحات.',
     icon: Sparkles,
     color: 'text-accent',
@@ -74,7 +74,7 @@ export default function CLISection() {
             </h2>
             
             <p className="text-grey text-lg leading-relaxed">
-              أداة QAMANAI CLI مصممة لتسريع سير عملك. من التطوير المحلي إلى النشر العالمي، كل شيء متاح بين يديك.
+              أداة QAMANIAI CLI مصممة لتسريع سير عملك. من التطوير المحلي إلى النشر العالمي، كل شيء متاح بين يديك.
             </p>
 
             <div className="grid gap-4">
@@ -120,7 +120,7 @@ export default function CLISection() {
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                   <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
                 </div>
-                <span className="text-xs text-grey">qamanai-cli — bash</span>
+                <span className="text-xs text-grey">qamaniai-cli — bash</span>
                 <div className="w-12" />
               </div>
               
@@ -176,9 +176,9 @@ export default function CLISection() {
                   )}
                   {activeCmd.id === 'deploy' && (
                     <>
-                      <p>Deploying to QAMANAI Cloud...</p>
+                      <p>Deploying to QAMANIAI Cloud...</p>
                       <p>Uploading assets [====================] 100%</p>
-                      <p className="text-green-500">🚀 Site is live at: <span className="text-blue-400 underline">https://my-app.qamanai.app</span></p>
+                      <p className="text-green-500">🚀 Site is live at: <span className="text-blue-400 underline">https://my-app.qamaniai.app</span></p>
                     </>
                   )}
                   {activeCmd.id === 'ai' && (
