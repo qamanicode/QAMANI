@@ -20,7 +20,7 @@
 لست بحاجة لتثبيت أي شيء بشكل دائم لبدء العمل، جرب الأداة مباشرة عبر `npx`:
 
 ```bash
-npx qamaniai
+npx @qamanicode/qamaniai
 ```
 
 ستقوم الأداة بسؤالك عن اسم مشروعك وما الذي تود بناءه، وسيقوم الذكاء الاصطناعي بالبقية! 🪄
@@ -32,7 +32,7 @@ npx qamaniai
 إذا كنت تفضل تثبيت الأداة عالمياً في جهازك:
 
 ```bash
-npm install -g qamaniai
+npm install -g @qamanicode/qamaniai
 ```
 
 ---
@@ -66,4 +66,4 @@ npm install -g qamaniai
 ---
 
 ### صنع بكل ❤️ لمجتمع المطورين العربي والعالمي.
-[GitHub Repository](https://github.com/qamanicode/qamaniai) | [NPM Package](https://www.npmjs.com/package/qamaniai)
+[GitHub Repository](https://github.com/qamanicode/qamaniai) | [NPM Package](https://www.npmjs.com/package/@qamanicode/qamaniai)
