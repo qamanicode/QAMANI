@@ -63,17 +63,21 @@ export default function Header() {
             <div className="w-8 h-8 bg-gradient-to-br from-[#41d1ff] to-[#bd34fe] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">Q</span>
             </div>
-            <span className="text-xl font-bold tracking-tight text-text hidden sm:block">QAMANAI</span>
+            <span className="text-xl font-bold tracking-tight text-text">QAMANAI</span>
           </a>
 
           <nav className="hidden lg:flex items-center gap-1">
-            {['Guide', 'Config', 'Plugins'].map((item) => (
+            {[
+              { name: 'Guide', id: 'guide' },
+              { name: 'Config', id: 'config' },
+              { name: 'Plugins', id: 'plugins' }
+            ].map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.name}
+                href={`#${item.id}`}
                 className="px-3 py-2 text-sm font-medium text-biege hover:text-text transition-colors"
               >
-                {item}
+                {item.name}
               </a>
             ))}
             <div className="relative">
@@ -157,14 +161,18 @@ export default function Header() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-primary border-b border-nickel p-6 flex flex-col gap-4 shadow-2xl max-h-[80vh] overflow-y-auto">
-          {['Guide', 'Config', 'Plugins'].map((item) => (
+          {[
+            { name: 'Guide', id: 'guide' },
+            { name: 'Config', id: 'config' },
+            { name: 'Plugins', id: 'plugins' }
+          ].map((item) => (
             <a 
-              key={item} 
-              href="#" 
+              key={item.name} 
+              href={`#${item.id}`} 
               onClick={() => setIsMenuOpen(false)}
               className="text-lg font-medium text-biege hover:text-text"
             >
-              {item}
+              {item.name}
             </a>
           ))}
           <div className="border-t border-nickel my-2" />

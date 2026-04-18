@@ -33,7 +33,7 @@ export default function Frameworks() {
   );
 
   return (
-    <section className="border-t border-nickel py-24 bg-primary/30 relative overflow-hidden">
+    <section id="plugins" className="border-t border-nickel py-24 bg-primary/30 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
 

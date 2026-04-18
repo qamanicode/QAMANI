@@ -48,7 +48,7 @@ export default function CLISection() {
   };
 
   return (
-    <section className="py-24 border-t border-nickel bg-primary/20 relative overflow-hidden">
+    <section id="config" className="py-24 border-t border-nickel bg-primary/20 relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full -z-10" />
       
@@ -79,24 +79,26 @@ export default function CLISection() {
 
             <div className="grid gap-4">
               {cliCommands.map((cmd) => (
-                <button
+                <motion.button
                   key={cmd.id}
                   onClick={() => setActiveCmd(cmd)}
-                  className={`flex items-start gap-4 p-4 rounded-2xl border transition-all text-right ${
+                  whileHover={{ x: 8, scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`flex items-start gap-4 p-4 rounded-2xl border transition-all text-right group ${
                     activeCmd.id === cmd.id 
                       ? 'bg-slate border-accent/50 shadow-lg' 
-                      : 'bg-transparent border-nickel hover:border-accent/30'
+                      : 'bg-transparent border-nickel hover:border-accent/30 hover:bg-slate/30'
                   }`}
                   dir="rtl"
                 >
-                  <div className={`p-2 rounded-xl bg-primary border border-nickel ${activeCmd.id === cmd.id ? 'text-accent' : 'text-grey'}`}>
+                  <div className={`p-2 rounded-xl bg-primary border border-nickel transition-colors ${activeCmd.id === cmd.id ? 'text-accent border-accent/30' : 'text-grey group-hover:text-accent group-hover:border-accent/30'}`}>
                     <cmd.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className={`font-bold ${activeCmd.id === cmd.id ? 'text-text' : 'text-grey'}`}>{cmd.title}</h4>
-                    <p className="text-sm text-grey/70">{cmd.description}</p>
+                    <h4 className={`font-bold transition-colors ${activeCmd.id === cmd.id ? 'text-text' : 'text-grey group-hover:text-text'}`}>{cmd.title}</h4>
+                    <p className="text-sm text-grey/70 transition-colors group-hover:text-grey">{cmd.description}</p>
                   </div>
-                </button>
+                </motion.button>
               ))}
             </div>
           </motion.div>

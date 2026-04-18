@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
+import React, { useState } from 'react';
 import { 
   Layout, 
   MousePointer2, 
@@ -17,15 +18,82 @@ import {
   ChevronRight,
   Sparkles
 } from 'lucide-react';
-import { useState } from 'react';
+import { 
+  DndContext, 
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  useSortable
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
+// Block Components
+import NavbarBlock from './visual-builder/blocks/NavbarBlock';
+import HeroBlock from './visual-builder/blocks/HeroBlock';
+import FeaturesBlock from './visual-builder/blocks/FeaturesBlock';
+import FooterBlock from './visual-builder/blocks/FooterBlock';
+import PricingBlock from './visual-builder/blocks/PricingBlock';
 
 type BlockType = 'hero' | 'features' | 'pricing' | 'footer' | 'navbar';
 
 interface Block {
   id: string;
   type: BlockType;
-  content: string;
+  data: any;
 }
+
+const blockComponents: Record<BlockType, React.ComponentType<any>> = {
+  navbar: NavbarBlock,
+  hero: HeroBlock,
+  features: FeaturesBlock,
+  pricing: PricingBlock,
+  footer: FooterBlock,
+};
+
+const defaultData: Record<BlockType, any> = {
+  navbar: {
+    logoText: 'QAMANAI',
+    links: ['الرئيسية', 'المميزات', 'الأسعار'],
+    ctaText: 'ابدأ الآن'
+  },
+  hero: {
+    badge: 'تكنولوجيا الجيل القادم',
+    title: 'ابنِ مستقبلك بذكاء وسرعة',
+    subtitle: 'استخدم أدواتنا المتطورة لإنشاء تطبيقات ويب مذهلة في دقائق معدودة. القوة بين يديك الآن.',
+    primaryCta: 'ابدأ مجاناً',
+    secondaryCta: 'شاهد العرض',
+    imageUrl: 'https://picsum.photos/seed/visual/800/800'
+  },
+  features: {
+    items: [
+      { title: "أداء فائق", desc: "سرعة استجابة لا تضاهى في جميع الأجهزة." },
+      { title: "أمان متكامل", desc: "حماية بياناتك هي أولويتنا القصوى دائماً." },
+      { title: "نقل عالمي", desc: "انشر موقعك في ثوانٍ لأي مكان في العالم." },
+      { title: "ذكاء محترف", desc: "أدوات ذكية تساعدك في اتخاذ قراراتك." }
+    ]
+  },
+  pricing: {
+    plans: [
+      { name: "الأساسي", price: "0", features: ["مشروع واحد", "دعم محدود", "نطاق فرعي"] },
+      { name: "المحترف", price: "29", features: ["مشاريع غير محدودة", "دعم متميز", "نطاق مخصص", "أدوات الذكاء"], popular: true },
+      { name: "للشركات", price: "99", features: ["إدارة فرق", "تخصيص كامل", "واجهة برمجة تطبيقات"] },
+    ]
+  },
+  footer: {
+    logoText: 'QAMANAI',
+    desc: 'نحن نصنع المستقبل الرقمي بأدوات بسيطة وقوية للجميع.',
+    copyright: '© 2026 QAMANAI. جميع الحقوق محفوظة.'
+  }
+};
 
 const templateLibrary = [
   { id: 'saas', name: 'SaaS Landing', image: 'https://picsum.photos/seed/saas/300/200', blocks: ['navbar', 'hero', 'features', 'footer'] },
@@ -41,18 +109,107 @@ const blockIcons: Record<BlockType, any> = {
   footer: Layout,
 };
 
+function SortableBlock({ block, onRemove, onUpdate }: { 
+  block: Block; 
+  onRemove: (id: string) => void;
+  onUpdate: (id: string, newData: any) => void;
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({ id: block.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : 'auto',
+    position: 'relative' as const,
+  };
+
+  const Component = blockComponents[block.type];
+
+  return (
+    <div 
+      ref={setNodeRef} 
+      style={style} 
+      className={`group relative border-b border-nickel/30 last:border-none ${isDragging ? 'opacity-50 shadow-2xl' : ''}`}
+    >
+      <div className="relative z-0">
+        <Component data={block.data} onUpdate={(newData: any) => onUpdate(block.id, newData)} />
+      </div>
+
+      {/* Drag Handle */}
+      <div 
+        {...attributes} 
+        {...listeners} 
+        className="absolute top-1/2 left-4 -translate-y-1/2 flex flex-col gap-1.5 p-3 rounded-lg bg-slate/50 border border-nickel opacity-0 group-hover:opacity-100 z-30 cursor-grab active:cursor-grabbing transition-opacity shadow-lg"
+      >
+        <div className="w-1 h-1 rounded-full bg-accent" />
+        <div className="w-1 h-1 rounded-full bg-accent" />
+        <div className="w-1 h-1 rounded-full bg-accent" />
+      </div>
+
+      {/* Block Controls */}
+      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+        <div className="p-2 rounded-lg bg-slate border border-nickel text-grey">
+          <Layers className="w-4 h-4" />
+        </div>
+        <button 
+          onClick={() => onRemove(block.id)}
+          className="p-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg"
+        >
+          <Trash2 className="w-4 h-4" />
+        </button>
+      </div>
+      
+    </div>
+  );
+}
+
 export default function VisualBuilder() {
   const [canvasBlocks, setCanvasBlocks] = useState<Block[]>([]);
   const [viewMode, setViewMode] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
   const [showLibrary, setShowLibrary] = useState(false);
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      setCanvasBlocks((items) => {
+        const oldIndex = items.findIndex((i) => i.id === active.id);
+        const newIndex = items.findIndex((i) => i.id === over?.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
   const addBlock = (type: BlockType) => {
     const newBlock: Block = {
       id: Math.random().toString(36).substr(2, 9),
       type,
-      content: `محتوى ${type} افتراضي`,
+      data: defaultData[type],
     };
     setCanvasBlocks([...canvasBlocks, newBlock]);
+  };
+
+  const updateBlockData = (id: string, newData: any) => {
+    setCanvasBlocks(prev => prev.map(b => b.id === id ? { ...b, data: { ...b.data, ...newData } } : b));
   };
 
   const removeBlock = (id: string) => {
@@ -63,7 +220,7 @@ export default function VisualBuilder() {
     const newBlocks = blocks.map(type => ({
       id: Math.random().toString(36).substr(2, 9),
       type: type as BlockType,
-      content: `محتوى ${type} من القالب`,
+      data: defaultData[type as BlockType],
     }));
     setCanvasBlocks(newBlocks);
     setShowLibrary(false);
@@ -142,7 +299,10 @@ export default function VisualBuilder() {
                     dir="rtl"
                   >
                     <div className="p-2 rounded-lg bg-primary border border-nickel text-grey group-hover:text-accent">
-                      {blockIcons[type] && <Layout className="w-4 h-4" />}
+                      {(() => {
+                        const Icon = blockIcons[type];
+                        return <Icon className="w-4 h-4" />;
+                      })()}
                     </div>
                     <span className="text-sm font-medium text-text capitalize">{type}</span>
                     <Plus className="w-3 h-3 text-grey mr-auto" />
@@ -177,43 +337,29 @@ export default function VisualBuilder() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex flex-col">
-                    <AnimatePresence>
-                      {canvasBlocks.map((block, index) => (
-                        <motion.div
-                          key={block.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.95 }}
-                          layout
-                          className="group relative border-b border-nickel/30 last:border-none"
-                        >
-                          {/* Block Preview Placeholder */}
-                          <div className={`w-full p-12 flex items-center justify-center bg-slate/10 group-hover:bg-accent/5 transition-colors ${
-                            block.type === 'hero' ? 'h-64' : 'h-32'
-                          }`}>
-                            <div className="flex flex-col items-center gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
-                              <Layout className="w-6 h-6 text-accent" />
-                              <span className="text-xs font-mono uppercase tracking-tighter text-grey">{block.type} Section</span>
-                            </div>
-                          </div>
-
-                          {/* Block Controls */}
-                          <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button className="p-2 rounded-lg bg-slate border border-nickel text-grey hover:text-text">
-                              <Plus className="w-4 h-4" />
-                            </button>
-                            <button 
-                              onClick={() => removeBlock(block.id)}
-                              className="p-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </AnimatePresence>
-                  </div>
+                  <DndContext 
+                    sensors={sensors}
+                    collisionDetection={closestCenter}
+                    onDragEnd={handleDragEnd}
+                  >
+                    <SortableContext 
+                      items={canvasBlocks.map(b => b.id)}
+                      strategy={verticalListSortingStrategy}
+                    >
+                      <div className="flex flex-col">
+                        <AnimatePresence initial={false}>
+                          {canvasBlocks.map((block) => (
+                            <SortableBlock 
+                              key={block.id} 
+                              block={block} 
+                              onRemove={removeBlock} 
+                              onUpdate={updateBlockData}
+                            />
+                          ))}
+                        </AnimatePresence>
+                      </div>
+                    </SortableContext>
+                  </DndContext>
                 )}
               </motion.div>
             </div>
